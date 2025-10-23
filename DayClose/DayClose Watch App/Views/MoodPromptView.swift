@@ -10,10 +10,10 @@ import SwiftUI
 struct MoodPromptView: View {
     @Environment(\.managedObjectContext) private var viewContext
     @Binding var showingMoodSelection: Bool
-    
+
     @State private var todayEntry: MoodEntry?
     @State private var isLoading = false
-    
+
     var body: some View {
         ScrollView {
             VStack(spacing: 16) {
@@ -32,7 +32,7 @@ struct MoodPromptView: View {
             loadTodayEntry()
         }
     }
-    
+
     private func loadTodayEntry() {
         todayEntry = PersistenceController.shared.fetchTodayEntry()
     }
@@ -41,16 +41,16 @@ struct MoodPromptView: View {
 struct PromptView: View {
     @Binding var showingMoodSelection: Bool
     @StateObject private var preferences = UserPreferences.shared
-    
+
     var body: some View {
         VStack(spacing: 16) {
             heroCard
-            
+
             // Streak badge (if exists)
             if preferences.currentStreak > 0 {
                 streakBadge
             }
-            
+
             Button {
                 WKInterfaceDevice.current().play(.click)
                 showingMoodSelection = true
@@ -59,7 +59,7 @@ struct PromptView: View {
                     Image(systemName: "sparkles.rectangle.stack")
                         .font(.headline)
                         .symbolRenderingMode(.hierarchical)
-                    
+
                     VStack(alignment: .leading, spacing: 2) {
                         Text(NSLocalizedString("prompt.button", comment: ""))
                             .font(.body.weight(.semibold))
@@ -67,9 +67,9 @@ struct PromptView: View {
                             .font(.caption2)
                             .foregroundStyle(Color.primary.opacity(0.7))
                     }
-                    
+
                     Spacer(minLength: 0)
-                    
+
                     Image(systemName: "arrow.right.circle.fill")
                         .font(.headline)
                         .symbolRenderingMode(.hierarchical)
@@ -77,7 +77,7 @@ struct PromptView: View {
             }
             .buttonStyle(ReflectionPrimaryButtonStyle())
             .accessibilityLabel(NSLocalizedString("prompt.button.accessibility", comment: ""))
-            
+
             // Gesture hint
             Text(NSLocalizedString("prompt.gesture.hint", comment: ""))
                 .font(.caption2)
@@ -85,7 +85,7 @@ struct PromptView: View {
                 .multilineTextAlignment(.center)
         }
     }
-    
+
     private var heroCard: some View {
         VStack(alignment: .leading, spacing: 10) {
             Text(greetingText.uppercased())
@@ -93,12 +93,12 @@ struct PromptView: View {
                 .fontWeight(.semibold)
                 .kerning(0.8)
                 .foregroundStyle(Color.white.opacity(0.85))
-            
+
             Text(NSLocalizedString("prompt.card.title", comment: ""))
                 .font(.title3)
                 .fontWeight(.semibold)
                 .foregroundStyle(Color.white)
-            
+
             Text(NSLocalizedString("prompt.card.subtitle", comment: ""))
                 .font(.footnote)
                 .foregroundStyle(Color.white.opacity(0.9))
@@ -128,24 +128,28 @@ struct PromptView: View {
                 .padding(14)
         }
     }
-    
+
     private var streakBadge: some View {
         HStack(spacing: 8) {
             Image(systemName: "flame.fill")
                 .foregroundStyle(.orange)
                 .symbolEffect(.pulse, options: .repeating)
-            
+
             Text("\(preferences.currentStreak)")
                 .font(.title2.bold())
                 .foregroundStyle(.orange)
-            
-            Text(preferences.currentStreak == 1 ? 
-                 NSLocalizedString("streak.day.singular", comment: "") :
-                 NSLocalizedString("streak.days.plural", comment: ""))
-                .font(.caption)
-                .foregroundStyle(.secondary)
-            
-            if preferences.currentStreak == preferences.longestStreak && preferences.longestStreak > 1 {
+
+            Text(
+                preferences.currentStreak == 1
+                    ? NSLocalizedString("streak.day.singular", comment: "")
+                    : NSLocalizedString("streak.days.plural", comment: "")
+            )
+            .font(.caption)
+            .foregroundStyle(.secondary)
+
+            if preferences.currentStreak == preferences.longestStreak
+                && preferences.longestStreak > 1
+            {
                 Image(systemName: "trophy.fill")
                     .foregroundStyle(.yellow)
                     .symbolEffect(.bounce, options: .repeating)
@@ -163,10 +167,10 @@ struct PromptView: View {
         )
         .transition(.scale.combined(with: .opacity))
     }
-    
+
     private var greetingText: String {
         let hour = Calendar.current.component(.hour, from: Date())
-        
+
         switch hour {
         case 5..<12:
             return NSLocalizedString("greeting.morning", comment: "")
@@ -178,11 +182,11 @@ struct PromptView: View {
             return NSLocalizedString("greeting.night", comment: "")
         }
     }
-    
+
     private var accentGradient: LinearGradient {
         let hour = Calendar.current.component(.hour, from: Date())
         let colors: [Color]
-        
+
         switch hour {
         case 5..<12:
             colors = [Color.cyan, Color.blue]
@@ -193,24 +197,26 @@ struct PromptView: View {
         default:
             colors = [Color(red: 0.15, green: 0.18, blue: 0.32), Color.indigo]
         }
-        
-        return LinearGradient(colors: colors,
-                              startPoint: .topLeading,
-                              endPoint: .bottomTrailing)
+
+        return LinearGradient(
+            colors: colors,
+            startPoint: .topLeading,
+            endPoint: .bottomTrailing)
     }
 }
 
 struct CompletedCheckInView: View {
     let entry: MoodEntry
-    
+
     var body: some View {
         VStack(spacing: 16) {
             // Checkmark
             Image(systemName: "checkmark.circle.fill")
                 .font(.system(size: 50))
                 .foregroundStyle(.green)
-                .accessibilityLabel(NSLocalizedString("checkin.complete.accessibility", comment: ""))
-            
+                .accessibilityLabel(
+                    NSLocalizedString("checkin.complete.accessibility", comment: ""))
+
             // Mood display
             if let mood = entry.mood {
                 HStack(spacing: 8) {
@@ -221,7 +227,7 @@ struct CompletedCheckInView: View {
                         .fontWeight(.semibold)
                 }
             }
-            
+
             // Contextual message
             if let message = entry.contextualMessage {
                 Text(message)
@@ -230,7 +236,7 @@ struct CompletedCheckInView: View {
                     .foregroundStyle(.secondary)
                     .padding(.horizontal)
             }
-            
+
             // Timestamp
             Text(entry.formattedDate)
                 .font(.caption)
@@ -259,20 +265,25 @@ private struct ReflectionPrimaryButtonStyle: ButtonStyle {
                             .stroke(Color.white.opacity(0.08), lineWidth: 1)
                     )
             }
-            .shadow(color: Color.black.opacity(configuration.isPressed ? 0.1 : 0.22),
-                    radius: configuration.isPressed ? 2 : 6,
-                    x: 0,
-                    y: configuration.isPressed ? 1 : 4)
+            .shadow(
+                color: Color.black.opacity(configuration.isPressed ? 0.1 : 0.22),
+                radius: configuration.isPressed ? 2 : 6,
+                x: 0,
+                y: configuration.isPressed ? 1 : 4
+            )
             .scaleEffect(configuration.isPressed ? 0.97 : 1.0)
             .animation(.easeOut(duration: 0.15), value: configuration.isPressed)
     }
-    
+
     private func buttonGradient(isPressed: Bool) -> LinearGradient {
         let baseColors = [Color(red: 0.32, green: 0.38, blue: 0.94), Color.purple]
-        let pressedColors = [Color(red: 0.26, green: 0.32, blue: 0.78), Color(red: 0.44, green: 0.24, blue: 0.78)]
-        
-        return LinearGradient(colors: isPressed ? pressedColors : baseColors,
-                              startPoint: .topLeading,
-                              endPoint: .bottomTrailing)
+        let pressedColors = [
+            Color(red: 0.26, green: 0.32, blue: 0.78), Color(red: 0.44, green: 0.24, blue: 0.78),
+        ]
+
+        return LinearGradient(
+            colors: isPressed ? pressedColors : baseColors,
+            startPoint: .topLeading,
+            endPoint: .bottomTrailing)
     }
 }

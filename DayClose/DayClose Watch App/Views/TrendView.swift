@@ -5,20 +5,20 @@
 //  7-day history and trend analysis
 //
 
-import SwiftUI
 import CoreData
+import SwiftUI
 
 struct TrendView: View {
     @Environment(\.managedObjectContext) private var viewContext
-    
+
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \MoodEntry.date, ascending: false)],
         animation: .default
     )
     private var entries: FetchedResults<MoodEntry>
-    
+
     @State private var showingAnalysis = false
-    
+
     var body: some View {
         ScrollView {
             VStack(spacing: 16) {
@@ -27,33 +27,36 @@ struct TrendView: View {
                     Text(NSLocalizedString("trend.title", comment: ""))
                         .font(.title3)
                         .fontWeight(.semibold)
-                    
+
                     Text(NSLocalizedString("trend.subtitle", comment: ""))
                         .font(.caption)
                         .foregroundStyle(.secondary)
                 }
                 .padding(.top)
-                
+
                 if entries.isEmpty {
                     emptyStateView
                 } else {
                     // Mood chart visualization
-                    MoodChartView(entries: Array(entries.prefix(7)))
-                        .padding(.bottom, 8)
-                    
+                    // TODO: Add MoodChartView.swift to Xcode project
+                    // MoodChartView(entries: Array(entries.prefix(7)))
+                    //     .padding(.bottom, 8)
+
                     // Entry list
                     LazyVStack(spacing: 12) {
                         ForEach(Array(entries.prefix(7)), id: \.id) { entry in
                             TrendEntryCard(entry: entry)
                         }
                     }
-                    
+
                     // Trend analysis button
                     if entries.count >= 3 {
                         Button {
                             showingAnalysis = true
                         } label: {
-                            Label(NSLocalizedString("trend.analysis.button", comment: ""), systemImage: "chart.line.uptrend.xyaxis")
+                            Label(
+                                NSLocalizedString("trend.analysis.button", comment: ""),
+                                systemImage: "chart.line.uptrend.xyaxis")
                         }
                         .buttonStyle(.bordered)
                         .padding(.top, 8)
@@ -67,13 +70,13 @@ struct TrendView: View {
             TrendAnalysisView(entries: Array(entries.prefix(7)))
         }
     }
-    
+
     private var emptyStateView: some View {
         VStack(spacing: 16) {
             Image(systemName: "chart.xyaxis.line")
                 .font(.system(size: 40))
                 .foregroundStyle(.secondary)
-            
+
             Text(NSLocalizedString("trend.empty.message", comment: ""))
                 .font(.body)
                 .multilineTextAlignment(.center)
@@ -85,7 +88,7 @@ struct TrendView: View {
 
 struct TrendEntryCard: View {
     let entry: MoodEntry
-    
+
     var body: some View {
         HStack(spacing: 12) {
             // Mood emoji
@@ -93,18 +96,18 @@ struct TrendEntryCard: View {
                 Text(mood.emoji)
                     .font(.title2)
             }
-            
+
             // Date and details
             VStack(alignment: .leading, spacing: 4) {
                 Text(formattedDate)
                     .font(.headline)
-                
+
                 if let mood = entry.mood {
                     Text(mood.localizedLabel)
                         .font(.caption)
                         .foregroundStyle(.secondary)
                 }
-                
+
                 // Health metrics indicator
                 if entry.hrvValue > 0 || entry.activityRingCompletion > 0 {
                     HStack(spacing: 4) {
@@ -114,7 +117,7 @@ struct TrendEntryCard: View {
                             Text("\(Int(entry.activityRingCompletion * 100))%")
                                 .font(.caption2)
                         }
-                        
+
                         if entry.hrvValue > 0 {
                             Image(systemName: "heart.fill")
                                 .font(.caption2)
@@ -123,7 +126,7 @@ struct TrendEntryCard: View {
                     .foregroundStyle(.tertiary)
                 }
             }
-            
+
             Spacer()
         }
         .padding()
@@ -132,10 +135,10 @@ struct TrendEntryCard: View {
         .accessibilityElement(children: .combine)
         .accessibilityLabel(accessibilityLabel)
     }
-    
+
     private var formattedDate: String {
         guard let date = entry.date else { return "" }
-        
+
         if Calendar.current.isDateInToday(date) {
             return NSLocalizedString("trend.today", comment: "")
         } else if Calendar.current.isDateInYesterday(date) {
@@ -146,7 +149,7 @@ struct TrendEntryCard: View {
             return formatter.string(from: date)
         }
     }
-    
+
     private var accessibilityLabel: String {
         var label = formattedDate
         if let mood = entry.mood {
@@ -159,30 +162,30 @@ struct TrendEntryCard: View {
 struct TrendAnalysisView: View {
     let entries: [MoodEntry]
     @Environment(\.dismiss) private var dismiss
-    
+
     var body: some View {
         NavigationStack {
             ScrollView {
                 VStack(spacing: 20) {
                     let analysis = InsightsEngine.shared.analyzeTrend(entries: entries)
-                    
+
                     // Trend icon
                     Image(systemName: trendIcon(analysis.trend))
                         .font(.system(size: 50))
                         .foregroundStyle(trendColor(analysis.trend))
-                    
+
                     // Trend message
                     Text(analysis.message)
                         .font(.body)
                         .multilineTextAlignment(.center)
-                    
+
                     // Mood distribution
                     VStack(alignment: .leading, spacing: 12) {
                         Text(NSLocalizedString("trend.distribution.title", comment: ""))
                             .font(.headline)
-                        
+
                         let distribution = PersistenceController.shared.getMoodDistribution(days: 7)
-                        
+
                         ForEach(MoodType.allCases, id: \.self) { mood in
                             HStack {
                                 Text(mood.emoji)
@@ -212,7 +215,7 @@ struct TrendAnalysisView: View {
             }
         }
     }
-    
+
     private func trendIcon(_ trend: TrendAnalysis.Trend) -> String {
         switch trend {
         case .improving: return "arrow.up.circle.fill"
@@ -220,7 +223,7 @@ struct TrendAnalysisView: View {
         case .declining: return "arrow.down.circle.fill"
         }
     }
-    
+
     private func trendColor(_ trend: TrendAnalysis.Trend) -> Color {
         switch trend {
         case .improving: return .green

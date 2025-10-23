@@ -13,7 +13,7 @@ enum MoodType: String, CaseIterable, Codable {
     case neutral = "neutral"
     case difficult = "difficult"
     case bad = "bad"
-    
+
     var emoji: String {
         switch self {
         case .great: return "🤩"
@@ -23,7 +23,7 @@ enum MoodType: String, CaseIterable, Codable {
         case .bad: return "😢"
         }
     }
-    
+
     var labelTurkish: String {
         switch self {
         case .great: return "Harika"
@@ -33,7 +33,7 @@ enum MoodType: String, CaseIterable, Codable {
         case .bad: return "Kötü"
         }
     }
-    
+
     var labelEnglish: String {
         switch self {
         case .great: return "Great"
@@ -43,7 +43,7 @@ enum MoodType: String, CaseIterable, Codable {
         case .bad: return "Bad"
         }
     }
-    
+
     /// Numeric score for trend analysis (1-5 scale)
     var score: Int {
         switch self {
@@ -54,18 +54,20 @@ enum MoodType: String, CaseIterable, Codable {
         case .bad: return 1
         }
     }
-    
+
     var localizedLabel: String {
         if Locale.current.language.languageCode?.identifier == "tr" {
             return labelTurkish
         }
         return labelEnglish
     }
-    
+
     var accessibilityLabel: String {
-        String(format: NSLocalizedString("mood.accessibility.label", comment: ""), localizedLabel, emoji)
+        String(
+            format: NSLocalizedString("mood.accessibility.label", comment: ""), localizedLabel,
+            emoji)
     }
-    
+
     var colorName: String {
         switch self {
         case .great: return "MoodGreen"
@@ -75,7 +77,7 @@ enum MoodType: String, CaseIterable, Codable {
         case .bad: return "MoodRed"
         }
     }
-    
+
     /// Color gradient for visual feedback
     var gradientColors: (start: String, end: String) {
         switch self {
