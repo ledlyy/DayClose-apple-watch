@@ -131,3 +131,13 @@
 "problem.report.error.title" = "Unable to Generate";
 "problem.report.error.message" = "We could not prepare your diagnostics bundle. Try again or contact support.";
 "problem.report.refresh" = "Refresh Events";
+
+// MARK: - Streaks
+"streak.day.singular" = "day streak";
+"streak.days.plural" = "days streak";
+"streak.personal.best" = "Personal best!";
+
+// MARK: - Charts
+"chart.title" = "7-Day Trend";
+"chart.mood.label" = "Mood Score";
+"chart.day.label" = "Day";

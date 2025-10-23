@@ -131,3 +131,13 @@
 "problem.report.error.title" = "Oluşturulamadı";
 "problem.report.error.message" = "Tanılama paketi hazırlanamadı. Tekrar deneyin veya destekle iletişime geçin.";
 "problem.report.refresh" = "Olayları Yenile";
+
+// MARK: - Streaks
+"streak.day.singular" = "gün serisi";
+"streak.days.plural" = "gün serisi";
+"streak.personal.best" = "Kişisel rekor!";
+
+// MARK: - Charts
+"chart.title" = "7 Günlük Trend";
+"chart.mood.label" = "Ruh Hali Skoru";
+"chart.day.label" = "Gün";

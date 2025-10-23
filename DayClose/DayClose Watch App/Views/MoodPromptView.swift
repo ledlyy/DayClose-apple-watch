@@ -40,10 +40,16 @@ struct MoodPromptView: View {
 
 struct PromptView: View {
     @Binding var showingMoodSelection: Bool
+    @StateObject private var preferences = UserPreferences.shared
     
     var body: some View {
         VStack(spacing: 16) {
             heroCard
+            
+            // Streak badge (if exists)
+            if preferences.currentStreak > 0 {
+                streakBadge
+            }
             
             Button {
                 WKInterfaceDevice.current().play(.click)
@@ -121,6 +127,41 @@ struct PromptView: View {
                 .foregroundStyle(Color.white.opacity(0.7))
                 .padding(14)
         }
+    }
+    
+    private var streakBadge: some View {
+        HStack(spacing: 8) {
+            Image(systemName: "flame.fill")
+                .foregroundStyle(.orange)
+                .symbolEffect(.pulse, options: .repeating)
+            
+            Text("\(preferences.currentStreak)")
+                .font(.title2.bold())
+                .foregroundStyle(.orange)
+            
+            Text(preferences.currentStreak == 1 ? 
+                 NSLocalizedString("streak.day.singular", comment: "") :
+                 NSLocalizedString("streak.days.plural", comment: ""))
+                .font(.caption)
+                .foregroundStyle(.secondary)
+            
+            if preferences.currentStreak == preferences.longestStreak && preferences.longestStreak > 1 {
+                Image(systemName: "trophy.fill")
+                    .foregroundStyle(.yellow)
+                    .symbolEffect(.bounce, options: .repeating)
+            }
+        }
+        .padding(.horizontal, 16)
+        .padding(.vertical, 10)
+        .background(
+            Capsule()
+                .fill(Color(.systemGray6))
+                .overlay(
+                    Capsule()
+                        .stroke(Color.orange.opacity(0.3), lineWidth: 1)
+                )
+        )
+        .transition(.scale.combined(with: .opacity))
     }
     
     private var greetingText: String {

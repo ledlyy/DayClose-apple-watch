@@ -21,6 +21,11 @@ class UserPreferences: ObservableObject {
     @AppStorage("diagnosticsConsent") var diagnosticsConsent: Bool = false
     @AppStorage("diagnosticsUserIdentifier") var diagnosticsUserIdentifier: String = UUID().uuidString
     
+    // Streak tracking
+    @AppStorage("currentStreak") var currentStreak: Int = 0
+    @AppStorage("longestStreak") var longestStreak: Int = 0
+    @AppStorage("lastCheckInDate") var lastCheckInDate: String = ""
+    
     private init() {}
     
     var reminderTime: Date {
@@ -42,6 +47,45 @@ class UserPreferences: ObservableObject {
             metadata: [
                 "hour": "\(reminderHour)",
                 "minute": String(format: "%02d", reminderMinute)
+            ]
+        )
+    }
+    
+    /// Update streak when a new mood entry is logged
+    func updateStreak() {
+        let today = Calendar.current.startOfDay(for: Date())
+        let formatter = ISO8601DateFormatter()
+        formatter.formatOptions = [.withFullDate]
+        
+        if let lastDate = formatter.date(from: lastCheckInDate) {
+            let lastCheckIn = Calendar.current.startOfDay(for: lastDate)
+            let daysBetween = Calendar.current.dateComponents([.day], from: lastCheckIn, to: today).day ?? 0
+            
+            if daysBetween == 1 {
+                // Consecutive day - increment streak
+                currentStreak += 1
+                if currentStreak > longestStreak {
+                    longestStreak = currentStreak
+                }
+            } else if daysBetween > 1 {
+                // Streak broken - reset
+                currentStreak = 1
+            }
+            // If daysBetween == 0, same day check-in, don't change streak
+        } else {
+            // First ever check-in
+            currentStreak = 1
+            longestStreak = 1
+        }
+        
+        lastCheckInDate = formatter.string(from: today)
+        
+        DiagnosticsLogger.shared.log(
+            level: .info,
+            message: "Streak updated",
+            metadata: [
+                "currentStreak": "\(currentStreak)",
+                "longestStreak": "\(longestStreak)"
             ]
         )
     }

@@ -37,6 +37,10 @@ struct TrendView: View {
                 if entries.isEmpty {
                     emptyStateView
                 } else {
+                    // Mood chart visualization
+                    MoodChartView(entries: Array(entries.prefix(7)))
+                        .padding(.bottom, 8)
+                    
                     // Entry list
                     LazyVStack(spacing: 12) {
                         ForEach(Array(entries.prefix(7)), id: \.id) { entry in

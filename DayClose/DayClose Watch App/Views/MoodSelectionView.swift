@@ -18,6 +18,7 @@ struct MoodSelectionView: View {
     @State private var isProcessing = false
     @State private var showingFeedback = false
     @State private var contextualMessage: String = ""
+    @State private var animateEmoji = false
     @FocusState private var focusedMood: MoodType?
     
     var body: some View {
@@ -93,31 +94,43 @@ struct MoodSelectionView: View {
             
             Text(selectedMood.emoji)
                 .font(.system(size: 60))
+                .scaleEffect(animateEmoji ? 1.2 : 1.0)
+                .animation(.spring(response: 0.6, dampingFraction: 0.5).repeatForever(autoreverses: true), value: animateEmoji)
             
             Text(contextualMessage)
                 .font(.body)
                 .multilineTextAlignment(.center)
                 .foregroundStyle(.secondary)
+                .transition(.opacity.combined(with: .scale))
             
             Button(NSLocalizedString("mood.feedback.done", comment: "")) {
                 isPresented = false
             }
             .buttonStyle(.borderedProminent)
+            .transition(.scale.combined(with: .opacity))
         }
         .onAppear {
             WKInterfaceDevice.current().play(.success)
+            withAnimation(.easeInOut(duration: 0.3).delay(0.2)) {
+                animateEmoji = true
+            }
         }
     }
     
     private func selectMood(_ mood: MoodType) {
-        selectedMood = mood
-        focusedMood = mood
+        withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) {
+            selectedMood = mood
+            focusedMood = mood
+        }
         WKInterfaceDevice.current().play(.click)
     }
     
     private func confirmSelection() {
         guard !isProcessing else { return }
         isProcessing = true
+        
+        // Enhanced haptic feedback
+        WKInterfaceDevice.current().play(.start)
         
         Task {
             // Fetch health metrics
@@ -139,19 +152,26 @@ struct MoodSelectionView: View {
                     activityRingCompletion: metrics.activity
                 )
                 
+                // Update streak
+                UserPreferences.shared.updateStreak()
+                
                 DiagnosticsLogger.shared.log(
                     level: .info,
                     message: "Mood entry recorded",
                     metadata: [
                         "mood": selectedMood.rawValue,
                         "hasHRV": metrics.hrv == nil ? "false" : "true",
-                        "hasActivity": metrics.activity == nil ? "false" : "true"
+                        "hasActivity": metrics.activity == nil ? "false" : "true",
+                        "streak": "\(UserPreferences.shared.currentStreak)"
                     ]
                 )
                 
                 contextualMessage = message
                 isProcessing = false
-                showingFeedback = true
+                
+                withAnimation(.spring(response: 0.5, dampingFraction: 0.7)) {
+                    showingFeedback = true
+                }
             }
         }
     }
