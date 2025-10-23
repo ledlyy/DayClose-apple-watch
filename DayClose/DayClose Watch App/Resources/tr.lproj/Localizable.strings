@@ -1,0 +1,133 @@
+/* 
+  Localizable.strings
+  DayClose Watch App (Turkish)
+  
+  Gizlilik odaklı Apple Watch için ruh hali takibi
+*/
+
+// MARK: - Common
+"common.done" = "Tamam";
+"common.save" = "Kaydet";
+"common.cancel" = "İptal";
+"common.close" = "Kapat";
+"common.ok" = "Tamam";
+
+// MARK: - Greetings
+"greeting.morning" = "Günaydın";
+"greeting.afternoon" = "İyi Günler";
+"greeting.evening" = "İyi Akşamlar";
+"greeting.night" = "İyi Geceler";
+
+// MARK: - Prompts
+"prompt.card.title" = "Bu Gecenin Yansıması";
+"prompt.card.subtitle" = "Bugünü bilinçli bir kapanışla tamamlayın.";
+"prompt.question" = "Bugün nasıl geçti?";
+"prompt.button" = "Kaydet";
+"prompt.button.detail" = "Ruh halinizi bir dakikadan kısa sürede kaydedin.";
+"prompt.button.accessibility" = "Ruh halinizi kaydetmek için dokunun";
+"prompt.gesture.hint" = "Hızlı onay için çift dokunun";
+
+// MARK: - Mood Selection
+"mood.selection.title" = "Bugün";
+"mood.selection.question" = "Bugün nasıl geçti?";
+"mood.selection.confirm" = "Onayla";
+"mood.selection.confirm.hint" = "Seçili ruh halini onaylamak için çift dokunun";
+"mood.selection.cancel" = "İptal";
+"mood.accessibility.label" = "%@ %@";
+
+// MARK: - Feedback
+"mood.feedback.done" = "Tamam";
+"checkin.complete.accessibility" = "Kayıt tamamlandı";
+
+// MARK: - Trends
+"trend.title" = "Bu Hafta";
+"trend.subtitle" = "Son 7 gün";
+"trend.navigation.title" = "Trendler";
+"trend.today" = "Bugün";
+"trend.yesterday" = "Dün";
+"trend.empty.message" = "Henüz kayıt yok. Trendleri görmek için her gün kayıt yapın.";
+"trend.analysis.button" = "Analizi Gör";
+"trend.analysis.title" = "Trend Analizi";
+"trend.distribution.title" = "Ruh Hali Dağılımı";
+"trend.insufficient.data" = "Trendleri görmek için kayıt yapmaya devam edin";
+"trend.improving" = "Ruh haliniz son zamanlarda iyileşiyor. Böyle devam!";
+"trend.stable" = "Ruh haliniz dengeli. Tutarlılık güzeldir!";
+"trend.declining" = "Son zamanlarda işler zor oldu. Kendinize iyi bakın.";
+
+// MARK: - Settings
+"settings.title" = "Ayarlar";
+"settings.section.reminders" = "Hatırlatmalar";
+"settings.section.health" = "Sağlık Entegrasyonu";
+"settings.section.privacy" = "Gizlilik";
+"settings.section.about" = "Hakkında";
+"settings.section.support" = "Destek";
+
+"settings.reminder.toggle" = "Akşam Hatırlatıcısı";
+"settings.reminder.time" = "Hatırlatma Saati";
+"settings.health.toggle" = "Sağlık Verilerini Kullan";
+"settings.health.description" = "Daha iyi içgörüler için HRV ve aktivite verilerini bağlayın. Tüm analiz saatinizde gerçekleşir.";
+"settings.privacy.title" = "Verileriniz Gizli Kalır";
+"settings.privacy.description" = "Tüm verileriniz yalnızca bu saatte tam dosya korumasıyla saklanır. Hiçbir şey asla herhangi bir sunucuya veya bulut hizmetine gönderilmez.";
+"settings.about.version" = "Sürüm";
+"settings.about.accessibility" = "Erişilebilirlik Özellikleri";
+"settings.time.picker.label" = "Saat Seçin";
+"settings.time.picker.title" = "Hatırlatma Saati";
+"settings.support.diagnostics.toggle" = "Tanılama Dahil Et";
+"settings.support.diagnostics.description" = "Bir sorun bildirirken anonim günlükleri eklemeye izin verin. Siz paylaşana kadar hiçbir şey saatinizden çıkmaz.";
+"settings.support.report.button" = "Sorun Bildir";
+
+// MARK: - Accessibility
+"accessibility.title" = "Erişilebilirlik";
+"accessibility.info.title" = "DayClose bu erişilebilirlik özelliklerini destekler:";
+"accessibility.gesture.doubletap.title" = "Çift Dokunma";
+"accessibility.gesture.doubletap.description" = "Seçili ruh halinizi çift dokunma hareketiyle hızlıca onaylayın";
+"accessibility.gesture.crown.title" = "Dijital Crown";
+"accessibility.gesture.crown.description" = "Dijital Crown'u çevirerek ruh hali seçeneklerinde gezinin";
+"accessibility.gesture.pinch.title" = "AssistiveTouch";
+"accessibility.gesture.pinch.description" = "Sistem ayarlarında etkinse kıstırma hareketlerini kullanın";
+"accessibility.voiceover.title" = "VoiceOver";
+"accessibility.voiceover.description" = "Açıklayıcı etiketler ve ipuçlarıyla tam VoiceOver desteği";
+
+// MARK: - Insights (Good Mood)
+"insight.good.default" = "Harika bir gün! Pozitif enerjinizi koruyun.";
+"insight.good.grateful" = "Bugün güzel işler çıkardınız! Bunu takdir edin.";
+"insight.good.active" = "Aktif ve iyi hissediyorsunuz—mükemmel kombinasyon!";
+"insight.good.active.high" = "Aktiviteniz ve sağlığınız uyumlu. Harika!";
+"insight.good.balanced" = "İyi bir ritminiz var. Dengeyi koruyun.";
+
+// MARK: - Insights (Neutral Mood)
+"insight.neutral.default" = "Dengeli bir gün. Bu da iyi.";
+"insight.neutral.steady" = "Tutarlılığın da kendine göre değeri var.";
+"insight.neutral.inactive" = "Belki yarın biraz hareket yardımcı olabilir?";
+"insight.neutral.rest" = "Dinlenme günleri de önemlidir.";
+
+// MARK: - Insights (Difficult Mood)
+"insight.difficult.default" = "Zor günler olur. Yarın yeni bir gün.";
+"insight.difficult.tomorrow" = "Kendinize karşı nazik olun. Dinlenin ve şarj olun.";
+"insight.difficult.rest.needed" = "Vücudunuz bu gece ekstra dinlenmeye ihtiyaç duyabilir.";
+"insight.difficult.selfcare" = "Kendinize iyi bakın. Bunu hak ediyorsunuz.";
+
+// MARK: - Notifications
+"notification.title" = "Akşam Kaydı";
+"notification.body" = "Gününüz nasıl geçti? Biraz düşünün.";
+
+// MARK: - Widgets
+"widget.display.name" = "DayClose";
+"widget.description" = "Günlük kayıt durumunuzu görün";
+"widget.checked.in" = "Kaydedildi";
+"widget.prompt.title" = "Kaydet";
+"widget.prompt.subtitle" = "Gününüz nasıl geçti?";
+"widget.inline.prompt" = "Ruh halinizi kaydedin";
+
+// MARK: - Problem Reporting
+"problem.report.title" = "Sorun Bildir";
+"problem.report.description" = "Destek ile paylaşmak için bir tanılama paketi oluşturun. Günlükler siz paylaşana kadar saatinizde kalır.";
+"problem.report.noConsent" = "Günlükleri eklemek için tanılamayı açın. İstediğiniz zaman kapatabilirsiniz.";
+"problem.report.empty" = "Henüz tanılama kaydı yok.";
+"problem.report.recentEvents" = "Son Olaylar";
+"problem.report.generate" = "Tanılama Oluştur";
+"problem.report.share" = "Tanılama Paketini Paylaş";
+"problem.report.share.preview" = "DayClose Tanılama";
+"problem.report.error.title" = "Oluşturulamadı";
+"problem.report.error.message" = "Tanılama paketi hazırlanamadı. Tekrar deneyin veya destekle iletişime geçin.";
+"problem.report.refresh" = "Olayları Yenile";

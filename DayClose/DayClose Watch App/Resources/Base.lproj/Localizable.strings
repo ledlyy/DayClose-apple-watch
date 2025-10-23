@@ -1,0 +1,133 @@
+/* 
+  Localizable.strings
+  DayClose Watch App (English - Base)
+  
+  Privacy-first mood tracking for Apple Watch
+*/
+
+// MARK: - Common
+"common.done" = "Done";
+"common.save" = "Save";
+"common.cancel" = "Cancel";
+"common.close" = "Close";
+"common.ok" = "OK";
+
+// MARK: - Greetings
+"greeting.morning" = "Good Morning";
+"greeting.afternoon" = "Good Afternoon";
+"greeting.evening" = "Good Evening";
+"greeting.night" = "Good Night";
+
+// MARK: - Prompts
+"prompt.card.title" = "Tonight's Reflection";
+"prompt.card.subtitle" = "Give today a mindful closing note.";
+"prompt.question" = "How was your day?";
+"prompt.button" = "Check In";
+"prompt.button.detail" = "Log your mood in under a minute";
+"prompt.button.accessibility" = "Tap to check in and log your mood";
+"prompt.gesture.hint" = "Use double tap to quickly confirm";
+
+// MARK: - Mood Selection
+"mood.selection.title" = "Today";
+"mood.selection.question" = "How was your day?";
+"mood.selection.confirm" = "Confirm";
+"mood.selection.confirm.hint" = "Double tap to confirm selected mood";
+"mood.selection.cancel" = "Cancel";
+"mood.accessibility.label" = "%@ %@";
+
+// MARK: - Feedback
+"mood.feedback.done" = "Done";
+"checkin.complete.accessibility" = "Check-in complete";
+
+// MARK: - Trends
+"trend.title" = "Your Week";
+"trend.subtitle" = "Last 7 days";
+"trend.navigation.title" = "Trends";
+"trend.today" = "Today";
+"trend.yesterday" = "Yesterday";
+"trend.empty.message" = "No entries yet. Check in daily to see your trends.";
+"trend.analysis.button" = "View Analysis";
+"trend.analysis.title" = "Trend Analysis";
+"trend.distribution.title" = "Mood Distribution";
+"trend.insufficient.data" = "Keep checking in to see your trends";
+"trend.improving" = "Your mood has been improving recently. Keep it up!";
+"trend.stable" = "Your mood has been steady. Consistency is good!";
+"trend.declining" = "Things have been tough lately. Remember to take care of yourself.";
+
+// MARK: - Settings
+"settings.title" = "Settings";
+"settings.section.reminders" = "Reminders";
+"settings.section.health" = "Health Integration";
+"settings.section.privacy" = "Privacy";
+"settings.section.about" = "About";
+"settings.section.support" = "Support";
+
+"settings.reminder.toggle" = "Evening Reminder";
+"settings.reminder.time" = "Reminder Time";
+"settings.health.toggle" = "Use Health Data";
+"settings.health.description" = "Connect HRV and activity data for better insights. All analysis happens on your watch.";
+"settings.privacy.title" = "Your Data Stays Private";
+"settings.privacy.description" = "All your data is stored only on this watch with complete file protection. Nothing is ever sent to any server or cloud service.";
+"settings.about.version" = "Version";
+"settings.about.accessibility" = "Accessibility Features";
+"settings.time.picker.label" = "Select Time";
+"settings.time.picker.title" = "Reminder Time";
+"settings.support.diagnostics.toggle" = "Include Diagnostics";
+"settings.support.diagnostics.description" = "Allow DayClose to bundle anonymized logs when you report a problem. Nothing leaves your watch without your confirmation.";
+"settings.support.report.button" = "Report a Problem";
+
+// MARK: - Accessibility
+"accessibility.title" = "Accessibility";
+"accessibility.info.title" = "DayClose supports these accessibility features:";
+"accessibility.gesture.doubletap.title" = "Double Tap";
+"accessibility.gesture.doubletap.description" = "Quickly confirm your selected mood with a double tap gesture";
+"accessibility.gesture.crown.title" = "Digital Crown";
+"accessibility.gesture.crown.description" = "Scroll through mood options by rotating the Digital Crown";
+"accessibility.gesture.pinch.title" = "AssistiveTouch";
+"accessibility.gesture.pinch.description" = "Use pinch gestures to navigate if enabled in system settings";
+"accessibility.voiceover.title" = "VoiceOver";
+"accessibility.voiceover.description" = "Full VoiceOver support with descriptive labels and hints";
+
+// MARK: - Insights (Good Mood)
+"insight.good.default" = "Great day! Keep up the positive energy.";
+"insight.good.grateful" = "Nice work today! Take a moment to appreciate it.";
+"insight.good.active" = "Active and feeling good—excellent combination!";
+"insight.good.active.high" = "Your activity and wellness are in sync. Amazing!";
+"insight.good.balanced" = "You're in a good rhythm. Keep it balanced.";
+
+// MARK: - Insights (Neutral Mood)
+"insight.neutral.default" = "A steady day. That's okay too.";
+"insight.neutral.steady" = "Consistency has its own value.";
+"insight.neutral.inactive" = "Maybe some movement could help tomorrow?";
+"insight.neutral.rest" = "Rest days are important too.";
+
+// MARK: - Insights (Difficult Mood)
+"insight.difficult.default" = "Tough days happen. Tomorrow is a new day.";
+"insight.difficult.tomorrow" = "Be kind to yourself. Rest and recharge.";
+"insight.difficult.rest.needed" = "Your body might need extra rest tonight.";
+"insight.difficult.selfcare" = "Take care of yourself. You deserve it.";
+
+// MARK: - Notifications
+"notification.title" = "Evening Check-In";
+"notification.body" = "How was your day? Take a moment to reflect.";
+
+// MARK: - Widgets
+"widget.display.name" = "DayClose";
+"widget.description" = "See your daily check-in status";
+"widget.checked.in" = "Checked In";
+"widget.prompt.title" = "Check In";
+"widget.prompt.subtitle" = "How was your day?";
+"widget.inline.prompt" = "Log your mood";
+
+// MARK: - Problem Reporting
+"problem.report.title" = "Report a Problem";
+"problem.report.description" = "Generate a diagnostics bundle to share with support. Logs stay on your watch until you share them.";
+"problem.report.noConsent" = "Turn on diagnostics to include logs. You can disable them anytime.";
+"problem.report.empty" = "No diagnostics recorded yet.";
+"problem.report.recentEvents" = "Recent Events";
+"problem.report.generate" = "Generate Diagnostics";
+"problem.report.share" = "Share Diagnostics Bundle";
+"problem.report.share.preview" = "DayClose Diagnostics";
+"problem.report.error.title" = "Unable to Generate";
+"problem.report.error.message" = "We could not prepare your diagnostics bundle. Try again or contact support.";
+"problem.report.refresh" = "Refresh Events";
